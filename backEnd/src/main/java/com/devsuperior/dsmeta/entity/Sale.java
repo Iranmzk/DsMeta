@@ -21,4 +21,24 @@ public class Sale {
     public Long getId() {
         return id;
     }
+
+    public String getSellerName() {
+        return sellerName;
+    }
+
+    public Integer getVisited() {
+        return visited;
+    }
+
+    public Integer getDeals() {
+        return deals;
+    }
+
+    public Double getAmount() {
+        return amount;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
 }
