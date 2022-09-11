@@ -2,16 +2,23 @@ import NotificationButtom from '../NotificationsButtom';
 import './styles.css';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 
 function SalesCard() {
-    
+
     // const min = new Date(new Date().setDate(new Date().getDate() - 365));
 
     const [minDate, setMinDate] = useState(new Date());
-    const [maxDate,setMaxDate]= useState(new Date());
-    
-    
+    const [maxDate, setMaxDate] = useState(new Date());
+
+    useEffect(() => {
+        axios.get("http://localhost:8080/sales")
+        .then(response => {
+            console.log(response.data);
+        });
+    }, []);
+
     return (
         <div className="dsmeta-card">
             <h2 className="dsmeta-sales-title">Vendas</h2>
@@ -19,7 +26,7 @@ function SalesCard() {
                 <div className="dsmeta-former-control-container">
                     <DatePicker
                         selected={minDate}
-                        onChange={(date: Date) => {setMinDate(date)}}
+                        onChange={(date: Date) => { setMinDate(date) }}
                         className="dsmeta-form-control"
                         dateFormat="dd/MM/yyyy"
                     />
@@ -27,7 +34,7 @@ function SalesCard() {
                 <div className="dsmeta-former-control-container">
                     <DatePicker
                         selected={maxDate}
-                        onChange={(date: Date) => {setMaxDate(date)}}
+                        onChange={(date: Date) => { setMaxDate(date) }}
                         className="dsmeta-form-control"
                         dateFormat="dd/MM/yyyy"
                     />
@@ -85,7 +92,8 @@ function SalesCard() {
                                 <div className="dsmeta-redbtm-container">
                                     <NotificationButtom />
                                 </div>
-                            </td>                        </tr>
+                            </td>
+                        </tr>
                         <tr>
                             <td className="show992">#341</td>
                             <td className="show576">01/09/2022</td>
