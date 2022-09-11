@@ -18,11 +18,17 @@ function SalesCard() {
     const [sales, setSales] = useState<Sale[]>([]);
 
     useEffect(() => {
-        axios.get(`${BASE_URL}/sales`)
+        const dmin = minDate.toISOString().slice(0, 10);
+        const dmax = maxDate.toISOString().slice(0, 10);
+
+
+        console.log(dmin);
+
+        axios.get(`${BASE_URL}/sales?minDate=${dmin}&maxDate=${dmax}`)
             .then(response => {
                 setSales(response.data.content);
             });
-    }, []);
+    }, [minDate,maxDate]);
 
     return (
         <div className="dsmeta-card">
@@ -78,20 +84,6 @@ function SalesCard() {
 
                             )
                         })}
-
-                        <tr>
-                            <td className="show992">#341</td>
-                            <td className="show576">01/09/2022</td>
-                            <td>Anakin</td>
-                            <td className="show992">15</td>
-                            <td className="show992">11</td>
-                            <td>R$5500.00</td>
-                            <td>
-                                <div className="dsmeta-redbtm-container">
-                                    <NotificationButtom />
-                                </div>
-                            </td>
-                        </tr>
                     </tbody>
                 </table>
             </div>
